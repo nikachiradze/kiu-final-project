@@ -44,27 +44,6 @@ public class GameController {
 
         CheckmateDetector chd = new StandardCheckmateDetector(board);
 
-//        if (legalMoves.contains(targetSquare) &&
-//                allowed.contains(targetSquare) &&
-//                board.getCheckmateDetector().testMove(currPiece, targetSquare)) {
-//
-//
-//            currPiece.move(targetSquare,board);
-//            board.getCheckmateDetector().update();
-//
-//            if (board.getCheckmateDetector().blackCheckMated()) {
-//                gameWindow.checkmateOccurred(0);
-//            } else if (board.getCheckmateDetector().whiteCheckMated()) {
-//                gameWindow.checkmateOccurred(1);
-//            } else {
-//                board.toggleTurn();
-//            }
-//        } else {
-//            currPiece.getPosition().setDisplay(true);
-//        }
-//
-//        board.setCurrPiece(null);
-
         PieceColor color = board.getTurn()? PieceColor.BLACK : PieceColor.WHITE;
 
         PieceColor checkColor = board.getTurn()? PieceColor.WHITE : PieceColor.BLACK;

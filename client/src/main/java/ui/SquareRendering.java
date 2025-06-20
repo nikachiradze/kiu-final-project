@@ -3,19 +3,20 @@ package ui;
 import DTOs.SquareDTO;
 import chess.model.Square;
 import Enums.PieceColor;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-
+@Setter
 public class SquareRendering extends JComponent {
 
-    private Square square;
+    private SquareDTO square;
 
-    public Square getSquare() {
+    public SquareDTO getSquare() {
         return square;
     }
 
-    public SquareRendering(Square square) {
+    public SquareRendering(SquareDTO square) {
         this.square = square;
         this.setBorder(BorderFactory.createEmptyBorder());
     }

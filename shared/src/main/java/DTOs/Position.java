@@ -1,6 +1,10 @@
 package DTOs;
 
+import lombok.EqualsAndHashCode;
 import lombok.Value;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 @Value
 public class Position implements Serializable {
@@ -15,4 +19,8 @@ public class Position implements Serializable {
         return "" + (char) ('a' + x) + (8 - y);  // Convert y correctly as 1-based index
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(x,y);
+    }
 }

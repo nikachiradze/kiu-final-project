@@ -11,29 +11,33 @@ import java.awt.*;
 import java.io.IOException;
 
 public class BoardRendering extends JPanel{
-    private final Board chessBoard;
+    private  BoardDTO chessBoard;
     @Setter
     private int currX, currY;
 
-    private final GameController gameController;
+    private SquareRendering[][] squareRenderings = new SquareRendering[8][8];
 
-    public BoardRendering(Board board, GameWindow gameWindow) {
+//    private final GameController gameController;
+
+    public BoardRendering(BoardDTO board, GameWindow gameWindow) {
         this.chessBoard = board;
-        this.gameController = new GameController(board, gameWindow);
+//        this.gameController = new GameController(board, gameWindow);
 
         setLayout(new GridLayout(8, 8, 0, 0));
         setPreferredSize(new Dimension(400, 400));
-        MouseAdapter mouseAdapter = new BoardMouseHandler(gameController,this);
-        addMouseListener(mouseAdapter);
-        addMouseMotionListener(mouseAdapter);
+//        MouseAdapter mouseAdapter = new BoardMouseHandler(gameController,this);
+//        addMouseListener(mouseAdapter);
+//        addMouseMotionListener(mouseAdapter);
 
         drawInitialSquares();
     }
 
     private void drawInitialSquares() {
-        Square[][] squares = chessBoard.getSquareArray();
+        SquareDTO[][] squares = chessBoard.getBoard();
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
+                SquareRendering sqr = new SquareRendering(squares[y][x]);
+                squareRenderings[y][x] = sqr;
                 add(new SquareRendering(squares[y][x]));
             }
         }
@@ -42,7 +46,7 @@ public class BoardRendering extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Square[][] squares = chessBoard.getSquareArray();
+        SquareDTO[][] squares = chessBoard.getBoard();
 
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
@@ -50,7 +54,7 @@ public class BoardRendering extends JPanel{
             }
         }
 
-        Piece currPiece = chessBoard.getCurrPiece();
+        PieceDTO currPiece = chessBoard.getCurrPiece();
         if (currPiece != null) {
             if ((currPiece.getColor() == PieceColor.WHITE && chessBoard.isWhiteTurn()) ||
                     (currPiece.getColor() == PieceColor.BLACK && !chessBoard.isWhiteTurn())) {
@@ -68,6 +72,25 @@ public class BoardRendering extends JPanel{
             }
         }
     }
+
+    public void updateBoard(BoardDTO newBoard) {
+        this.chessBoard = newBoard;
+
+        this.removeAll(); // 🧼 Clear all old squares
+
+        SquareDTO[][] squares = newBoard.getBoard();
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                SquareRendering sr = new SquareRendering(squares[y][x]);
+                squareRenderings[y][x] = sr;
+                this.add(sr);
+            }
+        }
+
+        this.revalidate(); // 🔄 Re-layout new components
+        this.repaint();    // 🎨 Trigger re-draw
+    }
+
 
 //    private void setImagesOnPieces(){
 //        Square[][] board = chessBoard.getSquareArray();

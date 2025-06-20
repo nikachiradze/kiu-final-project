@@ -1,5 +1,6 @@
 package ui;
 
+import DTOs.PieceDTO;
 import chess.model.Piece;
 
 import javax.imageio.ImageIO;
@@ -11,7 +12,7 @@ import static Enums.PieceType.WHITE_PAWN;
 public class PieceRendering {
 
     private final Image img;
-    private final Piece piece;
+    private final PieceDTO piece;
 
     public PieceRendering(PieceDTO piece){
         this.piece = piece;

@@ -2,7 +2,7 @@ package pieceMovement;
 
 import chess.model.Board;
 import chess.model.Bishop;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import chess.model.Square;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ public class BishopMovementTests {
     @Test
     void testBishopCentralPositionAllMovesAvailable() {
         Square from = board.getSquare("d4");  // Central position
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -50,7 +50,7 @@ public class BishopMovementTests {
     @Test
     void testBishopInCornerPosition() {
         Square from = board.getSquare("a1");  // Corner position
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -62,13 +62,13 @@ public class BishopMovementTests {
     @Test
     void testBishopBlockedByFriendlyPieces() {
         Square from = board.getSquare("d4");  // Central position
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         // Surround bishop with friendly pieces at diagonal positions
         String[] friendlyPositions = {"c5", "b6", "a7", "e5", "f6", "g7", "h8", "e3", "f2", "g1", "c3", "b2", "a1"};
         for (String pos : friendlyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Bishop(PieceColor.WHITE, board.getSquare(pos), "/wbishop.png"));
+            board.getSquare(pos).setOccupyingPiece(new Bishop(PieceColor.WHITE, board.getSquare(pos)));
         }
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -79,13 +79,13 @@ public class BishopMovementTests {
     @Test
     void testBishopCanCaptureEnemyPieces() {
         Square from = board.getSquare("d4");  // Central position
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         // Place enemy pieces along diagonals
         String[] enemyPositions = {"c5", "e5", "c3", "e3"};
         for (String pos : enemyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Bishop(PieceColor.BLACK, board.getSquare(pos), "/bbishop.png"));
+            board.getSquare(pos).setOccupyingPiece(new Bishop(PieceColor.BLACK, board.getSquare(pos)));
         }
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -102,7 +102,7 @@ public class BishopMovementTests {
     @Test
     void testBlackBishopSymmetricMoves() {
         Square from = board.getSquare("e5");  // Symmetric position for Black Bishop
-        Bishop bishop = new Bishop(PieceColor.BLACK, from, "/bbishop.png");
+        Bishop bishop = new Bishop(PieceColor.BLACK, from);
         from.setOccupyingPiece(bishop);
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -120,7 +120,7 @@ public class BishopMovementTests {
     @Test
     void testBishopAtEdgeNotInCorner() {
         Square from = board.getSquare("a4");  // Position at edge, but not corner
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -137,7 +137,7 @@ public class BishopMovementTests {
     @Test
     void testBishopAtEdgeWithLimitedMoves() {
         Square from = board.getSquare("h4");
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -153,12 +153,12 @@ public class BishopMovementTests {
     @Test
     void testBishopSurroundedByFriendlyPieces() {
         Square from = board.getSquare("d4");  // Central position
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         String[] friendlyPositions = {"c5", "b6", "a7", "e5", "f6", "g7", "h8", "e3", "f2", "g1", "c3", "b2", "a1"};
         for (String pos : friendlyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Bishop(PieceColor.WHITE, board.getSquare(pos), "/wbishop.png"));
+            board.getSquare(pos).setOccupyingPiece(new Bishop(PieceColor.WHITE, board.getSquare(pos)));
         }
 
         List<Square> moves = bishop.getLegalMoves(board);
@@ -169,7 +169,7 @@ public class BishopMovementTests {
     @Test
     void testBishopOutOfBounds() {
         Square from = board.getSquare("a1");  // Corner position
-        Bishop bishop = new Bishop(PieceColor.WHITE, from, "/wbishop.png");
+        Bishop bishop = new Bishop(PieceColor.WHITE, from);
         from.setOccupyingPiece(bishop);
 
         List<Square> moves = bishop.getLegalMoves(board);

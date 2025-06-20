@@ -2,7 +2,7 @@ package pieceMovement;
 
 import chess.model.Board;
 import chess.model.Queen;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import chess.model.Square;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ public class QueenMovementTests {
     @Test
     void testQueenCentralPositionAllMovesAvailable() {
         Square from = board.getSquare("d4");
-        Queen queen = new Queen(PieceColor.WHITE, from, "/wqueen.png");
+        Queen queen = new Queen(PieceColor.WHITE, from);
         from.setOccupyingPiece(queen);
 
         List<Square> moves = queen.getLegalMoves(board);
@@ -58,7 +58,7 @@ public class QueenMovementTests {
     @Test
     void testQueenInCornerPosition() {
         Square from = board.getSquare("a1");
-        Queen queen = new Queen(PieceColor.WHITE, from, "/wqueen.png");
+        Queen queen = new Queen(PieceColor.WHITE, from);
         from.setOccupyingPiece(queen);
 
         List<Square> moves = queen.getLegalMoves(board);
@@ -79,7 +79,7 @@ public class QueenMovementTests {
     @Test
     void testQueenBlockedByFriendlyPieces() {
         Square from = board.getSquare("d4");
-        Queen queen = new Queen(PieceColor.WHITE, from, "/wqueen.png");
+        Queen queen = new Queen(PieceColor.WHITE, from);
         from.setOccupyingPiece(queen);
 
         String[] friendlyPositions = {
@@ -87,7 +87,7 @@ public class QueenMovementTests {
         };
 
         for (String pos : friendlyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.WHITE, board.getSquare(pos), "/wqueen.png"));
+            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.WHITE, board.getSquare(pos)));
         }
 
         List<Square> moves = queen.getLegalMoves(board);
@@ -98,7 +98,7 @@ public class QueenMovementTests {
     @Test
     void testQueenCanCaptureEnemyPieces() {
         Square from = board.getSquare("d4");
-        Queen queen = new Queen(PieceColor.WHITE, from, "/wqueen.png");
+        Queen queen = new Queen(PieceColor.WHITE, from);
         from.setOccupyingPiece(queen);
 
         String[] enemyPositions = {
@@ -106,7 +106,7 @@ public class QueenMovementTests {
         };
 
         for (String pos : enemyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.BLACK, board.getSquare(pos), "/bqueen.png"));
+            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.BLACK, board.getSquare(pos)));
         }
 
         List<Square> moves = queen.getLegalMoves(board);
@@ -121,7 +121,7 @@ public class QueenMovementTests {
     @Test
     void testQueenAtEdgeLimitedMoves() {
         Square from = board.getSquare("h4");
-        Queen queen = new Queen(PieceColor.WHITE, from, "/wqueen.png");
+        Queen queen = new Queen(PieceColor.WHITE, from);
         from.setOccupyingPiece(queen);
 
         List<Square> moves = queen.getLegalMoves(board);
@@ -144,17 +144,17 @@ public class QueenMovementTests {
     @Test
     void testQueenSurroundedByMixedPieces() {
         Square from = board.getSquare("d4");
-        Queen queen = new Queen(PieceColor.WHITE, from, "/wqueen.png");
+        Queen queen = new Queen(PieceColor.WHITE, from);
         from.setOccupyingPiece(queen);
 
         String[] friendlyPositions = {"d5", "e4", "d3", "c4"};
         for (String pos : friendlyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.WHITE, board.getSquare(pos), "/wqueen.png"));
+            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.WHITE, board.getSquare(pos)));
         }
 
         String[] enemyPositions = {"e5", "e3", "c3", "c5"};
         for (String pos : enemyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.BLACK, board.getSquare(pos), "/bqueen.png"));
+            board.getSquare(pos).setOccupyingPiece(new Queen(PieceColor.BLACK, board.getSquare(pos)));
         }
 
         List<Square> moves = queen.getLegalMoves(board);

@@ -3,7 +3,7 @@ package pieceMovement;
 import chess.model.Board;
 import chess.model.King;
 import chess.model.Rook;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import chess.model.Square;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class KingMovementTests {
     @Test
     void testKingCentralPosition() {
         Square from = board.getSquare("d4");
-        King king = new King(PieceColor.WHITE, from, "/wking.png");
+        King king = new King(PieceColor.WHITE, from);
         from.setOccupyingPiece(king);
 
         List<Square> moves = king.getLegalMoves(board);
@@ -53,7 +53,7 @@ public class KingMovementTests {
     @Test
     void testKingCornerPosition() {
         Square from = board.getSquare("a1");
-        King king = new King(PieceColor.WHITE, from, "/wking.png");
+        King king = new King(PieceColor.WHITE, from);
         from.setOccupyingPiece(king);
 
         List<Square> moves = king.getLegalMoves(board);
@@ -72,7 +72,7 @@ public class KingMovementTests {
     @Test
     void testKingBlockedByFriendlyPieces() {
         Square from = board.getSquare("d4");
-        King king = new King(PieceColor.WHITE, from, "/wking.png");
+        King king = new King(PieceColor.WHITE, from);
         from.setOccupyingPiece(king);
 
         String[] friendlyPositions = {
@@ -83,7 +83,7 @@ public class KingMovementTests {
 
         for (String pos : friendlyPositions) {
             Square square = board.getSquare(pos);
-            square.setOccupyingPiece(new King(PieceColor.WHITE, square, "/wking.png"));
+            square.setOccupyingPiece(new King(PieceColor.WHITE, square));
         }
 
         List<Square> moves = king.getLegalMoves(board);
@@ -93,7 +93,7 @@ public class KingMovementTests {
     @Test
     void testKingCanCaptureEnemies() {
         Square from = board.getSquare("d4");
-        King king = new King(PieceColor.WHITE, from, "/wking.png");
+        King king = new King(PieceColor.WHITE, from);
         from.setOccupyingPiece(king);
 
         String[] enemyPositions = {
@@ -104,7 +104,7 @@ public class KingMovementTests {
 
         for (String pos : enemyPositions) {
             Square square = board.getSquare(pos);
-            square.setOccupyingPiece(new King(PieceColor.BLACK, square, "/bking.png"));
+            square.setOccupyingPiece(new King(PieceColor.BLACK, square));
         }
 
         List<Square> moves = king.getLegalMoves(board);
@@ -119,7 +119,7 @@ public class KingMovementTests {
     @Test
     void testKingAtBoardEdge() {
         Square from = board.getSquare("h5");
-        King king = new King(PieceColor.WHITE, from, "/wking.png");
+        King king = new King(PieceColor.WHITE, from);
         from.setOccupyingPiece(king);
 
         List<Square> moves = king.getLegalMoves(board);
@@ -139,7 +139,7 @@ public class KingMovementTests {
     @Test
     void testKingSurroundedByMixedPieces() {
         Square from = board.getSquare("d4");
-        King king = new King(PieceColor.WHITE, from, "/wking.png");
+        King king = new King(PieceColor.WHITE, from);
         from.setOccupyingPiece(king);
 
         String[] friendly = { "c3", "c4", "d3", "e3" };
@@ -147,12 +147,12 @@ public class KingMovementTests {
 
         for (String pos : friendly) {
             Square square = board.getSquare(pos);
-            square.setOccupyingPiece(new King(PieceColor.WHITE, square, "/wking.png"));
+            square.setOccupyingPiece(new King(PieceColor.WHITE, square));
         }
 
         for (String pos : enemies) {
             Square square = board.getSquare(pos);
-            square.setOccupyingPiece(new King(PieceColor.BLACK, square, "/bking.png"));
+            square.setOccupyingPiece(new King(PieceColor.BLACK, square));
         }
 
         List<Square> moves = king.getLegalMoves(board);
@@ -173,8 +173,8 @@ public class KingMovementTests {
     void testWhiteKingsideCastle() {
         Square kingSquare = board.getSquare("e1");
         Square rookSquare = board.getSquare("h1");
-        King king = new King(PieceColor.WHITE, kingSquare, "/wking.png");
-        Rook rook = new Rook(PieceColor.WHITE, rookSquare, "/wrook.png");
+        King king = new King(PieceColor.WHITE, kingSquare);
+        Rook rook = new Rook(PieceColor.WHITE, rookSquare);
 
         kingSquare.setOccupyingPiece(king);
         rookSquare.setOccupyingPiece(rook);
@@ -189,8 +189,8 @@ public class KingMovementTests {
     void testWhiteQueensideCastle() {
         Square kingSquare = board.getSquare("e1");
         Square rookSquare = board.getSquare("a1");
-        King king = new King(PieceColor.WHITE, kingSquare, "/wking.png");
-        Rook rook = new Rook(PieceColor.WHITE, rookSquare, "/wrook.png");
+        King king = new King(PieceColor.WHITE, kingSquare);
+        Rook rook = new Rook(PieceColor.WHITE, rookSquare);
 
         kingSquare.setOccupyingPiece(king);
         rookSquare.setOccupyingPiece(rook);
@@ -207,9 +207,9 @@ public class KingMovementTests {
         Square rookSquare = board.getSquare("h1");
         Square blocking = board.getSquare("f1");
 
-        King king = new King(PieceColor.WHITE, kingSquare, "/wking.png");
-        Rook rook = new Rook(PieceColor.WHITE, rookSquare, "/wrook.png");
-        Rook blocker = new Rook(PieceColor.WHITE, blocking, "/wrook.png");
+        King king = new King(PieceColor.WHITE, kingSquare);
+        Rook rook = new Rook(PieceColor.WHITE, rookSquare);
+        Rook blocker = new Rook(PieceColor.WHITE, blocking);
 
         kingSquare.setOccupyingPiece(king);
         rookSquare.setOccupyingPiece(rook);
@@ -228,9 +228,9 @@ public class KingMovementTests {
         Square rookSquare = board.getSquare("h1");
         Square enemy = board.getSquare("e8");
 
-        King king = new King(PieceColor.WHITE, kingSquare, "/wking.png");
-        Rook rook = new Rook(PieceColor.WHITE, rookSquare, "/wrook.png");
-        Rook blackRook = new Rook(PieceColor.BLACK, enemy, "/brook.png");
+        King king = new King(PieceColor.WHITE, kingSquare);
+        Rook rook = new Rook(PieceColor.WHITE, rookSquare);
+        Rook blackRook = new Rook(PieceColor.BLACK, enemy);
 
         kingSquare.setOccupyingPiece(king);
         rookSquare.setOccupyingPiece(rook);

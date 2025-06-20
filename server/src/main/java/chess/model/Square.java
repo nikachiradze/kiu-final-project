@@ -1,6 +1,7 @@
 package chess.model;
 
-import chess.model.enums.PieceColor;
+import DTOs.Position;
+import Enums.PieceColor;
 import lombok.Getter;
 import lombok.Setter;
 

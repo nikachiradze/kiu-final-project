@@ -1,4 +1,4 @@
-package chess.model;
+package DTOs;
 
 import lombok.Value;
 

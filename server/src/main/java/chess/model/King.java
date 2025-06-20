@@ -1,15 +1,18 @@
 package chess.model;
 
+import Enums.PieceType;
 import chess.common.moveExecutor.MoveExecutorStrategy;
 import chess.common.moveExecutor.WithCastleMoveExecutor;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import chess.common.movement.MovementStrategy;
 import chess.common.movement.StandardKingMovement;
 
 public class King extends Piece {
 
-    public King(PieceColor color, Square initSq, String img_file) {
-        super(color, initSq, img_file);
+    public King(PieceColor color, Square initSq) {
+        super(color, initSq);
+        setPieceType(color == PieceColor.WHITE ? PieceType.WHITE_KING : PieceType.BLACK_KING);
+
     }
 
 

@@ -8,7 +8,7 @@ import chess.model.Board;
 import chess.model.Move;
 import chess.model.Piece;
 import chess.model.Square;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import ui.GameWindow;
 
 import java.util.List;

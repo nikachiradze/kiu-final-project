@@ -3,7 +3,7 @@ package chess.common.ThreatDetector;
 import chess.model.Board;
 import chess.model.Piece;
 import chess.model.Square;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 
 import java.util.List;
 

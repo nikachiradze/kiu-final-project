@@ -2,7 +2,7 @@ package GameStateTests;
 
 import chess.common.checkmateDetector.StandardCheckmateDetector;
 import chess.model.*;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,41 +36,41 @@ public class CheckmateTests {
         // 1. f3 e5 2. g4 Qh4#
         clearBoard();
         // White pieces
-        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1"), "/wking.png"));
-        setPiece("d1", new Queen(PieceColor.WHITE, board.getSquare("d1"), "/wqueen.png"));
-        setPiece("f1", new Bishop(PieceColor.WHITE, board.getSquare("f1"), "/wbishop.png"));
-        setPiece("g1", new Knight(PieceColor.WHITE, board.getSquare("g1"), "/wknight.png"));
-        setPiece("h1", new Rook(PieceColor.WHITE, board.getSquare("h1"), "/wrook.png"));
-        setPiece("a1", new Rook(PieceColor.WHITE, board.getSquare("a1"), "/wrook.png"));
-        setPiece("c1", new Bishop(PieceColor.WHITE, board.getSquare("c1"), "/wbishop.png"));
-        setPiece("b1", new Knight(PieceColor.WHITE, board.getSquare("b1"), "/wknight.png"));
-        setPiece("a2", new Pawn(PieceColor.WHITE, board.getSquare("a2"), "/wpawn.png"));
-        setPiece("b2", new Pawn(PieceColor.WHITE, board.getSquare("b2"), "/wpawn.png"));
-        setPiece("c2", new Pawn(PieceColor.WHITE, board.getSquare("c2"), "/wpawn.png"));
-        setPiece("d2", new Pawn(PieceColor.WHITE, board.getSquare("d2"), "/wpawn.png"));
-        setPiece("e2", new Pawn(PieceColor.WHITE, board.getSquare("e2"), "/wpawn.png"));
-        setPiece("f3", new Pawn(PieceColor.WHITE, board.getSquare("f3"), "/wpawn.png")); // Moved from f2
-        setPiece("g4", new Pawn(PieceColor.WHITE, board.getSquare("g4"), "/wpawn.png")); // Moved from g2
-        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2"), "/wpawn.png"));
+        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1")));
+        setPiece("d1", new Queen(PieceColor.WHITE, board.getSquare("d1")));
+        setPiece("f1", new Bishop(PieceColor.WHITE, board.getSquare("f1")));
+        setPiece("g1", new Knight(PieceColor.WHITE, board.getSquare("g1")));
+        setPiece("h1", new Rook(PieceColor.WHITE, board.getSquare("h1")));
+        setPiece("a1", new Rook(PieceColor.WHITE, board.getSquare("a1")));
+        setPiece("c1", new Bishop(PieceColor.WHITE, board.getSquare("c1")));
+        setPiece("b1", new Knight(PieceColor.WHITE, board.getSquare("b1")));
+        setPiece("a2", new Pawn(PieceColor.WHITE, board.getSquare("a2")));
+        setPiece("b2", new Pawn(PieceColor.WHITE, board.getSquare("b2")));
+        setPiece("c2", new Pawn(PieceColor.WHITE, board.getSquare("c2")));
+        setPiece("d2", new Pawn(PieceColor.WHITE, board.getSquare("d2")));
+        setPiece("e2", new Pawn(PieceColor.WHITE, board.getSquare("e2")));
+        setPiece("f3", new Pawn(PieceColor.WHITE, board.getSquare("f3"))); // Moved from f2
+        setPiece("g4", new Pawn(PieceColor.WHITE, board.getSquare("g4"))); // Moved from g2
+        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2")));
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("d8", new Queen(PieceColor.BLACK, board.getSquare("d8"), "/bqueen.png"));
-        setPiece("f8", new Bishop(PieceColor.BLACK, board.getSquare("f8"), "/bbishop.png"));
-        setPiece("g8", new Knight(PieceColor.BLACK, board.getSquare("g8"), "/bknight.png"));
-        setPiece("h8", new Rook(PieceColor.BLACK, board.getSquare("h8"), "/brook.png"));
-        setPiece("a8", new Rook(PieceColor.BLACK, board.getSquare("a8"), "/brook.png"));
-        setPiece("c8", new Bishop(PieceColor.BLACK, board.getSquare("c8"), "/bbishop.png"));
-        setPiece("b8", new Knight(PieceColor.BLACK, board.getSquare("b8"), "/bknight.png"));
-        setPiece("a7", new Pawn(PieceColor.BLACK, board.getSquare("a7"), "/bpawn.png"));
-        setPiece("b7", new Pawn(PieceColor.BLACK, board.getSquare("b7"), "/bpawn.png"));
-        setPiece("c7", new Pawn(PieceColor.BLACK, board.getSquare("c7"), "/bpawn.png"));
-        setPiece("d7", new Pawn(PieceColor.BLACK, board.getSquare("d7"), "/bpawn.png"));
-        setPiece("e5", new Pawn(PieceColor.BLACK, board.getSquare("e5"), "/bpawn.png")); // Moved from e7
-        setPiece("f7", new Pawn(PieceColor.BLACK, board.getSquare("f7"), "/bpawn.png"));
-        setPiece("g7", new Pawn(PieceColor.BLACK, board.getSquare("g7"), "/bpawn.png"));
-        setPiece("h7", new Pawn(PieceColor.BLACK, board.getSquare("h7"), "/bpawn.png"));
-        setPiece("h4", new Queen(PieceColor.BLACK, board.getSquare("h4"), "/bqueen.png")); // Checkmate position
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("d8", new Queen(PieceColor.BLACK, board.getSquare("d8")));
+        setPiece("f8", new Bishop(PieceColor.BLACK, board.getSquare("f8")));
+        setPiece("g8", new Knight(PieceColor.BLACK, board.getSquare("g8")));
+        setPiece("h8", new Rook(PieceColor.BLACK, board.getSquare("h8")));
+        setPiece("a8", new Rook(PieceColor.BLACK, board.getSquare("a8")));
+        setPiece("c8", new Bishop(PieceColor.BLACK, board.getSquare("c8")));
+        setPiece("b8", new Knight(PieceColor.BLACK, board.getSquare("b8")));
+        setPiece("a7", new Pawn(PieceColor.BLACK, board.getSquare("a7")));
+        setPiece("b7", new Pawn(PieceColor.BLACK, board.getSquare("b7")));
+        setPiece("c7", new Pawn(PieceColor.BLACK, board.getSquare("c7")));
+        setPiece("d7", new Pawn(PieceColor.BLACK, board.getSquare("d7")));
+        setPiece("e5", new Pawn(PieceColor.BLACK, board.getSquare("e5"))); // Moved from e7
+        setPiece("f7", new Pawn(PieceColor.BLACK, board.getSquare("f7")));
+        setPiece("g7", new Pawn(PieceColor.BLACK, board.getSquare("g7")));
+        setPiece("h7", new Pawn(PieceColor.BLACK, board.getSquare("h7")));
+        setPiece("h4", new Queen(PieceColor.BLACK, board.getSquare("h4"))); // Checkmate position
 
         // Test checkmate detection
         assertTrue(checkmateDetector.isCheckMate(PieceColor.WHITE), "White should be checkmated by Fool's Mate");
@@ -83,16 +83,16 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1"), "/wking.png"));
-        setPiece("f1", new Rook(PieceColor.WHITE, board.getSquare("f1"), "/wrook.png"));
-        setPiece("g1", new Rook(PieceColor.WHITE, board.getSquare("g1"), "/wrook.png"));
-        setPiece("d2", new Pawn(PieceColor.WHITE, board.getSquare("d2"), "/wpawn.png"));
-        setPiece("e2", new Pawn(PieceColor.WHITE, board.getSquare("e2"), "/wpawn.png"));
-        setPiece("f2", new Pawn(PieceColor.WHITE, board.getSquare("f2"), "/wpawn.png"));
+        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1")));
+        setPiece("f1", new Rook(PieceColor.WHITE, board.getSquare("f1")));
+        setPiece("g1", new Rook(PieceColor.WHITE, board.getSquare("g1")));
+        setPiece("d2", new Pawn(PieceColor.WHITE, board.getSquare("d2")));
+        setPiece("e2", new Pawn(PieceColor.WHITE, board.getSquare("e2")));
+        setPiece("f2", new Pawn(PieceColor.WHITE, board.getSquare("f2")));
 
         // Black pieces
-        setPiece("h8", new King(PieceColor.BLACK, board.getSquare("h8"), "/bking.png"));
-        setPiece("a1", new Rook(PieceColor.BLACK, board.getSquare("a1"), "/brook.png")); // Delivers checkmate
+        setPiece("h8", new King(PieceColor.BLACK, board.getSquare("h8")));
+        setPiece("a1", new Rook(PieceColor.BLACK, board.getSquare("a1"))); // Delivers checkmate
 
         assertTrue(checkmateDetector.isCheckMate(PieceColor.WHITE), "White should be checkmated by back rank mate");
     }
@@ -103,14 +103,14 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("h1", new King(PieceColor.WHITE, board.getSquare("h1"), "/wking.png"));
-        setPiece("g1", new Rook(PieceColor.WHITE, board.getSquare("g1"), "/wrook.png"));
-        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2"), "/wpawn.png"));
-        setPiece("g2", new Pawn(PieceColor.WHITE, board.getSquare("g2"), "/wpawn.png"));
+        setPiece("h1", new King(PieceColor.WHITE, board.getSquare("h1")));
+        setPiece("g1", new Rook(PieceColor.WHITE, board.getSquare("g1")));
+        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2")));
+        setPiece("g2", new Pawn(PieceColor.WHITE, board.getSquare("g2")));
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("f2", new Knight(PieceColor.BLACK, board.getSquare("f2"), "/bknight.png")); // Delivers checkmate
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("f2", new Knight(PieceColor.BLACK, board.getSquare("f2"))); // Delivers checkmate
 
         assertTrue(checkmateDetector.isCheckMate(PieceColor.WHITE), "White should be checkmated by smothered mate");
     }
@@ -121,17 +121,17 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1"), "/wking.png"));
-        setPiece("c4", new Bishop(PieceColor.WHITE, board.getSquare("c4"), "/wbishop.png"));
-        setPiece("e4", new Pawn(PieceColor.WHITE, board.getSquare("e4"), "/wpawn.png"));
-        setPiece("f7", new Queen(PieceColor.WHITE, board.getSquare("f7"), "/wqueen.png")); // Delivers checkmate
+        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1")));
+        setPiece("c4", new Bishop(PieceColor.WHITE, board.getSquare("c4")));
+        setPiece("e4", new Pawn(PieceColor.WHITE, board.getSquare("e4")));
+        setPiece("f7", new Queen(PieceColor.WHITE, board.getSquare("f7"))); // Delivers checkmate
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("d8", new Queen(PieceColor.BLACK, board.getSquare("d8"), "/bqueen.png"));
-        setPiece("c6", new Knight(PieceColor.BLACK, board.getSquare("c6"), "/bknight.png"));
-        setPiece("e5", new Pawn(PieceColor.BLACK, board.getSquare("e5"), "/bpawn.png"));
-        setPiece("f6", new Knight(PieceColor.BLACK, board.getSquare("f6"), "/bknight.png"));
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("d8", new Queen(PieceColor.BLACK, board.getSquare("d8")));
+        setPiece("c6", new Knight(PieceColor.BLACK, board.getSquare("c6")));
+        setPiece("e5", new Pawn(PieceColor.BLACK, board.getSquare("e5")));
+        setPiece("f6", new Knight(PieceColor.BLACK, board.getSquare("f6")));
 
         assertTrue(checkmateDetector.isCheckMate(PieceColor.BLACK), "Black should be checkmated by Scholar's mate");
     }
@@ -142,13 +142,13 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1"), "/wking.png"));
-        setPiece("d1", new Queen(PieceColor.WHITE, board.getSquare("d1"), "/wqueen.png")); // Can block check
-        setPiece("f2", new Pawn(PieceColor.WHITE, board.getSquare("f2"), "/wpawn.png"));
+        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1")));
+        setPiece("d1", new Queen(PieceColor.WHITE, board.getSquare("d1"))); // Can block check
+        setPiece("f2", new Pawn(PieceColor.WHITE, board.getSquare("f2")));
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("e3", new Rook(PieceColor.BLACK, board.getSquare("e3"), "/brook.png")); // Giving check
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("e3", new Rook(PieceColor.BLACK, board.getSquare("e3"))); // Giving check
 
         assertFalse(checkmateDetector.isCheckMate(PieceColor.WHITE), "Not checkmate - Queen can block check");
     }
@@ -159,11 +159,11 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1"), "/wking.png"));
+        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1")));
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("a1", new Rook(PieceColor.BLACK, board.getSquare("a1"), "/brook.png")); // Giving check
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("a1", new Rook(PieceColor.BLACK, board.getSquare("a1"))); // Giving check
 
         assertFalse(checkmateDetector.isCheckMate(PieceColor.WHITE), "Not checkmate - King can move to d2, e2, or f2");
     }
@@ -174,12 +174,12 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1"), "/wking.png"));
-        setPiece("d2", new Queen(PieceColor.WHITE, board.getSquare("d2"), "/wqueen.png")); // Can capture rook
+        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1")));
+        setPiece("d2", new Queen(PieceColor.WHITE, board.getSquare("d2"))); // Can capture rook
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("e2", new Rook(PieceColor.BLACK, board.getSquare("e2"), "/brook.png")); // Giving check but can be captured
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("e2", new Rook(PieceColor.BLACK, board.getSquare("e2"))); // Giving check but can be captured
 
         assertFalse(checkmateDetector.isCheckMate(PieceColor.WHITE), "Not checkmate - Queen can capture the Rook");
     }
@@ -190,12 +190,12 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1"), "/wking.png"));
-        setPiece("h1", new Rook(PieceColor.WHITE, board.getSquare("h1"), "/wrook.png"));
+        setPiece("e1", new King(PieceColor.WHITE, board.getSquare("e1")));
+        setPiece("h1", new Rook(PieceColor.WHITE, board.getSquare("h1")));
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("e2", new Queen(PieceColor.BLACK, board.getSquare("e2"), "/bqueen.png")); // Giving check
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("e2", new Queen(PieceColor.BLACK, board.getSquare("e2"))); // Giving check
 
         // Not checkmate because king can move to d1 or f1
         assertFalse(checkmateDetector.isCheckMate(PieceColor.WHITE), "Not checkmate - King can move to d1 or f1");
@@ -207,14 +207,14 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("g1", new King(PieceColor.WHITE, board.getSquare("g1"), "/wking.png"));
-        setPiece("g3", new Pawn(PieceColor.WHITE, board.getSquare("g3"), "/wpawn.png"));
-        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2"), "/wpawn.png"));
+        setPiece("g1", new King(PieceColor.WHITE, board.getSquare("g1")));
+        setPiece("g3", new Pawn(PieceColor.WHITE, board.getSquare("g3")));
+        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2")));
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("f1", new Rook(PieceColor.BLACK, board.getSquare("f1"), "/brook.png")); // Controls h-file
-        setPiece("h3", new Bishop(PieceColor.BLACK, board.getSquare("h3"), "/bbishop.png")); // Controls diagonal
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("f1", new Rook(PieceColor.BLACK, board.getSquare("f1"))); // Controls h-file
+        setPiece("h3", new Bishop(PieceColor.BLACK, board.getSquare("h3"))); // Controls diagonal
 
         assertTrue(checkmateDetector.isCheckMate(PieceColor.WHITE), "White should be checkmated by Rook and Bishop");
     }
@@ -225,14 +225,14 @@ public class CheckmateTests {
         clearBoard();
 
         // White pieces
-        setPiece("h1", new King(PieceColor.WHITE, board.getSquare("h1"), "/wking.png"));
-        setPiece("g2", new Pawn(PieceColor.WHITE, board.getSquare("g2"), "/wpawn.png"));
-        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2"), "/wpawn.png"));
+        setPiece("h1", new King(PieceColor.WHITE, board.getSquare("h1")));
+        setPiece("g2", new Pawn(PieceColor.WHITE, board.getSquare("g2")));
+        setPiece("h2", new Pawn(PieceColor.WHITE, board.getSquare("h2")));
 
         // Black pieces
-        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8"), "/bking.png"));
-        setPiece("g3", new Knight(PieceColor.BLACK, board.getSquare("g3"), "/bknight.png")); // Controls escape squares
-        setPiece("a1", new Rook(PieceColor.BLACK, board.getSquare("a1"), "/brook.png")); // Delivers check
+        setPiece("e8", new King(PieceColor.BLACK, board.getSquare("e8")));
+        setPiece("g3", new Knight(PieceColor.BLACK, board.getSquare("g3"))); // Controls escape squares
+        setPiece("a1", new Rook(PieceColor.BLACK, board.getSquare("a1"))); // Delivers check
 
         assertTrue(checkmateDetector.isCheckMate(PieceColor.WHITE), "White should be checkmated by Anastasia's mate");
     }

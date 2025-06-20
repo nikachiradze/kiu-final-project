@@ -1,14 +1,12 @@
 package chess.model;
 
+import Enums.PieceType;
 import chess.common.moveExecutor.MoveExecutorStrategy;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import chess.common.movement.MovementStrategy;
-import chess.util.PieceImageLoader;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 
@@ -19,8 +17,9 @@ public abstract class Piece {
     @Setter
     private Square position;
 
+    @Getter
     @Setter
-    private BufferedImage img;
+    private PieceType pieceType;
     @Setter
     private MovementStrategy movementStrategy;
 
@@ -31,12 +30,11 @@ public abstract class Piece {
     @Setter
     private boolean hasMoved;
 
-    public Piece(PieceColor color, Square initSq, String img_file) {
+    public Piece(PieceColor color, Square initSq) {
         this.color = color;
         this.position = initSq;
 
 
-        this.img = PieceImageLoader.loadImage(img_file);
         this.movementStrategy = getMovementStrategy();
         this.moveExecutorStrategy = getMoveExecutorStrategy();
     }
@@ -51,9 +49,6 @@ public abstract class Piece {
     protected abstract MoveExecutorStrategy getMoveExecutorStrategy();
 
 
-    public Image getImage() {
-        return img;
-    }
 
     public List<Square> getLegalMoves(Board b) {
         return movementStrategy.getLegalMoves(b);

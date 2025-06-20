@@ -1,14 +1,14 @@
 package ui;
 
-import chess.model.*;
-import chess.model.enums.PieceColor;
-import controller.GameController;
-import ui.handler.BoardMouseHandler;
+import DTOs.BoardDTO;
+import DTOs.PieceDTO;
+import DTOs.SquareDTO;
+import Enums.PieceColor;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.io.IOException;
 
 public class BoardRendering extends JPanel{
     private final Board chessBoard;
@@ -55,7 +55,13 @@ public class BoardRendering extends JPanel{
             if ((currPiece.getColor() == PieceColor.WHITE && chessBoard.isWhiteTurn()) ||
                     (currPiece.getColor() == PieceColor.BLACK && !chessBoard.isWhiteTurn())) {
 
-                Image img = currPiece.getImage();
+                Image img = null;
+                try {
+                    PieceRendering pieceRendering = new PieceRendering(currPiece);
+                    img = pieceRendering.getImage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 if (img != null) {
                     g.drawImage(img, currX, currY, null);
                 }

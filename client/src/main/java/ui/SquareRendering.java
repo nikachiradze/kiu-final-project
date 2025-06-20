@@ -1,7 +1,8 @@
 package ui;
 
+import DTOs.SquareDTO;
 import chess.model.Square;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 
 import javax.swing.*;
 import java.awt.*;

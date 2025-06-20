@@ -3,7 +3,7 @@ package pieceMovement;
 import chess.model.Board;
 import chess.model.Knight;
 
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import chess.model.Square;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class KnightMovementTests {
     @Test
     void testKnightCentralPositionAllMovesAvailable() {
         Square from = board.getSquare("d4");
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -49,7 +49,7 @@ public class KnightMovementTests {
     @Test
     void testKnightInCornerPosition() {
         Square from = board.getSquare("a1");
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -62,13 +62,13 @@ public class KnightMovementTests {
     @Test
     void testKnightBlockedByFriendlyPieces() {
         Square from = board.getSquare("d4");
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         // Surround knight with friendly pieces at valid L-move positions
         String[] friendlyPositions = {"c6", "e6", "f5", "f3", "e2", "c2", "b3", "b5"};
         for (String pos : friendlyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.WHITE, board.getSquare(pos), "/wknight.png"));
+            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.WHITE, board.getSquare(pos)));
         }
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -78,12 +78,12 @@ public class KnightMovementTests {
     @Test
     void testKnightCanCaptureEnemyPieces() {
         Square from = board.getSquare("d4");
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         String[] enemyPositions = {"c6", "e6", "f5", "f3", "e2", "c2", "b3", "b5"};
         for (String pos : enemyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.BLACK, board.getSquare(pos), "/bknight.png"));
+            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.BLACK, board.getSquare(pos)));
         }
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -97,7 +97,7 @@ public class KnightMovementTests {
     @Test
     void testBlackKnightSymmetricMoves() {
         Square from = board.getSquare("e5");
-        Knight knight = new Knight(PieceColor.BLACK, from, "/bknight.png");
+        Knight knight = new Knight(PieceColor.BLACK, from);
         from.setOccupyingPiece(knight);
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -115,7 +115,7 @@ public class KnightMovementTests {
     @Test
     void testKnightAtEdgeNotInCorner() {
         Square from = board.getSquare("a4");  // Position at edge, but not corner
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -133,7 +133,7 @@ public class KnightMovementTests {
     @Test
     void testKnightAtEdgeWithLimitedMoves() {
         Square from = board.getSquare("h4");  // Position at edge of the board
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -153,13 +153,13 @@ public class KnightMovementTests {
     @Test
     void testKnightSurroundedByFriendlyPieces() {
         Square from = board.getSquare("d4");
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         // Surround knight with friendly pieces at valid L-move positions
         String[] friendlyPositions = {"c6", "e6", "f5", "f3", "e2", "c2", "b3", "b5"};
         for (String pos : friendlyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.WHITE, board.getSquare(pos), "/wknight.png"));
+            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.WHITE, board.getSquare(pos)));
         }
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -171,19 +171,19 @@ public class KnightMovementTests {
     @Test
     void testKnightSurroundedByFriendlyAndEnemyPieces() {
         Square from = board.getSquare("d4");
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         // Friendly pieces on some of the L-move positions
         String[] friendlyPositions = {"c6", "e6", "f5", "f3", "e2", "c2"};
         for (String pos : friendlyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.WHITE, board.getSquare(pos), "/wknight.png"));
+            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.WHITE, board.getSquare(pos)));
         }
 
         // Enemy pieces on other L-move positions
         String[] enemyPositions = {"b3", "b5"};
         for (String pos : enemyPositions) {
-            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.BLACK, board.getSquare(pos), "/bknight.png"));
+            board.getSquare(pos).setOccupyingPiece(new Knight(PieceColor.BLACK, board.getSquare(pos)));
         }
 
         List<Square> moves = knight.getLegalMoves(board);
@@ -205,7 +205,7 @@ public class KnightMovementTests {
     @Test
     void testKnightOutOfBounds() {
         Square from = board.getSquare("a1");
-        Knight knight = new Knight(PieceColor.WHITE, from, "/wknight.png");
+        Knight knight = new Knight(PieceColor.WHITE, from);
         from.setOccupyingPiece(knight);
 
         // Knight is in the corner, check if out-of-bounds moves are ignored

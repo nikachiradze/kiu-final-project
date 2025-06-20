@@ -3,7 +3,7 @@ package pieceMovement;
 import chess.model.Board;
 import chess.model.Pawn;
 import chess.model.Square;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ public class PawnMovementTests {
     void testPawnLegalMoveForward() {
 
         Square from = board.getSquare("e2"); // e2
-        Pawn pawn = new Pawn(PieceColor.WHITE,from,"/wpawn.png");
+        Pawn pawn = new Pawn(PieceColor.WHITE,from);
         from.setOccupyingPiece(pawn);
         List<Square> moves = pawn.getLegalMoves(board);
         assertTrue(moves.contains(board.getSquare("e3"))); // e3
@@ -43,11 +43,11 @@ public class PawnMovementTests {
     @Test
     void testPawnBlockedByPiece() {
         Square from = board.getSquare("e2");
-        Pawn pawn = new Pawn(PieceColor.WHITE, from, "/wpawn.png");
+        Pawn pawn = new Pawn(PieceColor.WHITE, from);
         from.setOccupyingPiece(pawn);
 
         Square blockingSquare = board.getSquare("e3");
-        Pawn blocker = new Pawn(PieceColor.WHITE, blockingSquare, "/wpawn.png");
+        Pawn blocker = new Pawn(PieceColor.WHITE, blockingSquare);
         blockingSquare.setOccupyingPiece(blocker);
 
         List<Square> moves = pawn.getLegalMoves(board);
@@ -57,15 +57,15 @@ public class PawnMovementTests {
     @Test
     void testPawnCanCaptureDiagonally() {
         Square from = board.getSquare("d4");
-        Pawn pawn = new Pawn(PieceColor.WHITE, from, "/wpawn.png");
+        Pawn pawn = new Pawn(PieceColor.WHITE, from);
         from.setOccupyingPiece(pawn);
 
         Square enemySquare = board.getSquare("e5");
-        Pawn enemy = new Pawn(PieceColor.BLACK, enemySquare, "/bpawn.png");
+        Pawn enemy = new Pawn(PieceColor.BLACK, enemySquare);
         enemySquare.setOccupyingPiece(enemy);
 
         Square leftEnemySquare = board.getSquare("c5");
-        Pawn leftEnemy = new Pawn(PieceColor.BLACK, leftEnemySquare, "/bpawn.png");
+        Pawn leftEnemy = new Pawn(PieceColor.BLACK, leftEnemySquare);
         leftEnemySquare.setOccupyingPiece(leftEnemy);
 
         List<Square> moves = pawn.getLegalMoves(board);
@@ -77,7 +77,7 @@ public class PawnMovementTests {
     @Test
     void testPawnCannotMoveBackward() {
         Square from = board.getSquare("d4");
-        Pawn pawn = new Pawn(PieceColor.WHITE, from, "/wpawn.png");
+        Pawn pawn = new Pawn(PieceColor.WHITE, from);
         from.setOccupyingPiece(pawn);
 
         List<Square> moves = pawn.getLegalMoves(board);
@@ -88,7 +88,7 @@ public class PawnMovementTests {
     @Test
     void testBlackPawnInitialMove() {
         Square from = board.getSquare("d7"); // black pawn position
-        Pawn pawn = new Pawn(PieceColor.BLACK, from, "/bpawn.png");
+        Pawn pawn = new Pawn(PieceColor.BLACK, from);
         from.setOccupyingPiece(pawn);
 
         List<Square> moves = pawn.getLegalMoves(board);
@@ -101,11 +101,11 @@ public class PawnMovementTests {
     @Test
     void testBlackPawnBlocked() {
         Square from = board.getSquare("d7");
-        Pawn pawn = new Pawn(PieceColor.BLACK, from, "/bpawn.png");
+        Pawn pawn = new Pawn(PieceColor.BLACK, from);
         from.setOccupyingPiece(pawn);
 
         Square blocking = board.getSquare("d6");
-        blocking.setOccupyingPiece(new Pawn(PieceColor.WHITE, blocking, "/wpawn.png")); // white pawn blocks
+        blocking.setOccupyingPiece(new Pawn(PieceColor.WHITE, blocking)); // white pawn blocks
 
         List<Square> moves = pawn.getLegalMoves(board);
         assertFalse(moves.contains(blocking), "Black pawn should not move forward when blocked");
@@ -116,7 +116,7 @@ public class PawnMovementTests {
     @Test
     void testPawnCannotCaptureEmptyDiagonal() {
         Square from = board.getSquare("d4");
-        Pawn pawn = new Pawn(PieceColor.WHITE, from, "/wpawn.png");
+        Pawn pawn = new Pawn(PieceColor.WHITE, from);
         from.setOccupyingPiece(pawn);
 
         List<Square> moves = pawn.getLegalMoves(board);
@@ -128,7 +128,7 @@ public class PawnMovementTests {
     @Test
     void testBlackPawnCannotDoubleMoveAfterFirstMove() {
         Square from = board.getSquare("e7"); // not initial rank
-        Pawn pawn = new Pawn(PieceColor.BLACK, from, "/bpawn.png");
+        Pawn pawn = new Pawn(PieceColor.BLACK, from);
         from.setOccupyingPiece(pawn);
 
         pawn.move(board.getSquare("e6"),board);
@@ -143,14 +143,14 @@ public class PawnMovementTests {
     @Test
     void testPawnCannotCaptureFriendlyPiece() {
         Square from = board.getSquare("d4");
-        Pawn pawn = new Pawn(PieceColor.WHITE, from, "/wpawn.png");
+        Pawn pawn = new Pawn(PieceColor.WHITE, from);
         from.setOccupyingPiece(pawn);
 
         Square rightAlly = board.getSquare("e5");
-        rightAlly.setOccupyingPiece(new Pawn(PieceColor.WHITE, rightAlly, "/wpawn.png"));
+        rightAlly.setOccupyingPiece(new Pawn(PieceColor.WHITE, rightAlly));
 
         Square leftAlly = board.getSquare("c5");
-        leftAlly.setOccupyingPiece(new Pawn(PieceColor.WHITE, leftAlly, "/wpawn.png"));
+        leftAlly.setOccupyingPiece(new Pawn(PieceColor.WHITE, leftAlly));
 
         List<Square> moves = pawn.getLegalMoves(board);
 
@@ -162,7 +162,7 @@ public class PawnMovementTests {
     @Test
     void testPawnCannotMoveOffBoard() {
         Square from = board.getSquare("a8");
-        Pawn pawn = new Pawn(PieceColor.WHITE, from, "/wpawn.png");
+        Pawn pawn = new Pawn(PieceColor.WHITE, from);
         from.setOccupyingPiece(pawn);
 
         List<Square> moves = pawn.getLegalMoves(board);

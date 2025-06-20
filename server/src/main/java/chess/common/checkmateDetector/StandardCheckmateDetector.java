@@ -1,7 +1,7 @@
 package chess.common.checkmateDetector;
 
 import chess.model.*;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 
 import java.util.*;
 

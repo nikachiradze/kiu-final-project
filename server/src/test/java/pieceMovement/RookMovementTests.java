@@ -3,7 +3,7 @@ package pieceMovement;
 import chess.model.Board;
 import chess.model.Rook;
 import chess.model.Square;
-import chess.model.enums.PieceColor;
+import Enums.PieceColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ public class RookMovementTests {
     @Test
     void testRookUnblockedMovement() {
         Square from = board.getSquare("d4");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
         List<Square> moves = rook.getLegalMoves(board);
@@ -45,11 +45,11 @@ public class RookMovementTests {
     @Test
     void testRookBlockedByFriendlyPiece() {
         Square from = board.getSquare("d4");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
         Square blockSquare = board.getSquare("d6");
-        blockSquare.setOccupyingPiece(new Rook(PieceColor.WHITE, blockSquare, "/wrook.png"));
+        blockSquare.setOccupyingPiece(new Rook(PieceColor.WHITE, blockSquare));
 
         List<Square> moves = rook.getLegalMoves(board);
 
@@ -61,11 +61,11 @@ public class RookMovementTests {
     @Test
     void testRookCanCaptureEnemy() {
         Square from = board.getSquare("d4");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
         Square enemySquare = board.getSquare("d6");
-        enemySquare.setOccupyingPiece(new Rook(PieceColor.BLACK, enemySquare, "/brook.png"));
+        enemySquare.setOccupyingPiece(new Rook(PieceColor.BLACK, enemySquare));
 
         List<Square> moves = rook.getLegalMoves(board);
 
@@ -76,7 +76,7 @@ public class RookMovementTests {
     @Test
     void testRookAtCorner() {
         Square from = board.getSquare("a1");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
         List<Square> moves = rook.getLegalMoves(board);
@@ -91,13 +91,13 @@ public class RookMovementTests {
     @Test
     void testRookSurroundedByFriendlyPieces() {
         Square from = board.getSquare("d4");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
-        board.getSquare("d5").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("d5"), "/wrook.png"));
-        board.getSquare("d3").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("d3"), "/wrook.png"));
-        board.getSquare("c4").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("c4"), "/wrook.png"));
-        board.getSquare("e4").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("e4"), "/wrook.png"));
+        board.getSquare("d5").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("d5")));
+        board.getSquare("d3").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("d3")));
+        board.getSquare("c4").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("c4")));
+        board.getSquare("e4").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("e4")));
 
         List<Square> moves = rook.getLegalMoves(board);
 
@@ -107,13 +107,13 @@ public class RookMovementTests {
     @Test
     void testRookSurroundedByEnemyPieces() {
         Square from = board.getSquare("d4");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
-        board.getSquare("d5").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("d5"), "/brook.png"));
-        board.getSquare("d3").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("d3"), "/brook.png"));
-        board.getSquare("c4").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("c4"), "/brook.png"));
-        board.getSquare("e4").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("e4"), "/brook.png"));
+        board.getSquare("d5").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("d5")));
+        board.getSquare("d3").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("d3")));
+        board.getSquare("c4").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("c4")));
+        board.getSquare("e4").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("e4")));
 
         List<Square> moves = rook.getLegalMoves(board);
 
@@ -127,13 +127,13 @@ public class RookMovementTests {
     @Test
     void testRookWithMixedBlocks() {
         Square from = board.getSquare("d4");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
-        board.getSquare("d5").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("d5"), "/wrook.png"));
-        board.getSquare("d3").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("d3"), "/brook.png"));
-        board.getSquare("c4").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("c4"), "/brook.png"));
-        board.getSquare("e4").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("e4"), "/wrook.png"));
+        board.getSquare("d5").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("d5")));
+        board.getSquare("d3").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("d3")));
+        board.getSquare("c4").setOccupyingPiece(new Rook(PieceColor.BLACK, board.getSquare("c4")));
+        board.getSquare("e4").setOccupyingPiece(new Rook(PieceColor.WHITE, board.getSquare("e4")));
 
         List<Square> moves = rook.getLegalMoves(board);
 
@@ -146,7 +146,7 @@ public class RookMovementTests {
     @Test
     void testRookCannotMoveDiagonally() {
         Square from = board.getSquare("d4");
-        Rook rook = new Rook(PieceColor.WHITE, from, "/wrook.png");
+        Rook rook = new Rook(PieceColor.WHITE, from);
         from.setOccupyingPiece(rook);
 
         List<Square> moves = rook.getLegalMoves(board);
@@ -160,7 +160,7 @@ public class RookMovementTests {
     @Test
     void testBlackRookSymmetricMovement() {
         Square from = board.getSquare("f6");
-        Rook rook = new Rook(PieceColor.BLACK, from, "/brook.png");
+        Rook rook = new Rook(PieceColor.BLACK, from);
         from.setOccupyingPiece(rook);
 
         List<Square> moves = rook.getLegalMoves(board);

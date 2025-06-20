@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 
 
 public class GameWindow {
@@ -68,6 +69,8 @@ public class GameWindow {
         gameWindow.pack();
         gameWindow.setVisible(true);
         gameWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        connectToServerAndListen();
+
     }
     
 // Helper function to create data panel

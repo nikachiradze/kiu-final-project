@@ -3,7 +3,7 @@ package DTOs;
 import lombok.Value;
 
 @Value
-public class Position {
+public class Position implements Serializable {
     int x;
     int y;
 

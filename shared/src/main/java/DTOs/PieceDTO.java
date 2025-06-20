@@ -5,9 +5,11 @@ import Enums.PieceType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class PieceDTO {
+public class PieceDTO implements Serializable {
     private final PieceColor color;
     private SquareDTO position;
     private final PieceType pieceType;

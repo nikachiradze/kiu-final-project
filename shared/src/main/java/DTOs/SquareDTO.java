@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
 @Setter
-public class SquareDTO{
+public class SquareDTO implements Serializable {
     private final Position position;
     private final PieceColor color;;
 

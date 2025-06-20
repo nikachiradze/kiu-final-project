@@ -28,7 +28,7 @@ public class PieceRendering {
 
     public Image getImage() throws IOException {
         String pathName = piece.getPieceType().getImagePathName();
-        System.out.println(pathName);
+//        System.out.println(pathName);
         return ImageIO.read(getClass().getResource(pathName));
     }
 }

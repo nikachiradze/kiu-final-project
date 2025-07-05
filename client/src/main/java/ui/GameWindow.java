@@ -6,6 +6,9 @@ import DTOs.SquareDTO;
 import chess.common.adapter.ModelToDtoConverter;
 import chess.model.Board;
 import chess.util.Clock;
+import ui.mouseListener.BoardMouseListener;
+import ui.mouseListener.MouseListenerImpl;
+import ui.socket.ServerConnection;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -13,8 +16,10 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
+import java.util.function.Consumer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -32,6 +37,8 @@ public class GameWindow {
     private Board board;
 
     private BoardRendering boardRendering;
+
+    private ServerConnection serverConnection;
 
 
     public GameWindow(String blackName, String whiteName, int hh,
@@ -84,8 +91,21 @@ public class GameWindow {
         gameWindow.pack();
         gameWindow.setVisible(true);
         gameWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        connectToServerAndListen();
 
+
+
+//        boardRendering.addMouseListener(new BoardMouseListener(new MouseListenerImpl(boardRendering.getChessBoard(),boardRendering)));
+
+//        connectToServerAndListen();
+
+        startConnection();
+    }
+
+
+    private void startConnection(){
+        serverConnection = new ServerConnection("localhost", 8888, updateBoard());
+        boardRendering.addMouseListener(new BoardMouseListener(new MouseListenerImpl(boardRendering.getChessBoard(),boardRendering, serverConnection)));
+        new Thread(serverConnection).start();
     }
 
 // Helper function to create data panel
@@ -95,7 +115,8 @@ public class GameWindow {
             try {
                 Socket socket = new Socket("localhost", 8888);
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+//                out.writeObject(ModelToDtoConverter.convertModelToDto(this.board));
                 while (true) {
                     Object obj = in.readObject();
                     if (obj instanceof BoardDTO boardDTO) {
@@ -111,6 +132,17 @@ public class GameWindow {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+
+    private Consumer<BoardDTO> updateBoard() {
+        return (board) -> {
+            System.out.println("received");
+            var list = new ArrayList<PieceDTO>(board.getBlackPieces());
+            list.addAll(board.getWhitePieces());
+            setPiecesToTheSquares(list, board.getBoard());
+            boardRendering.updateBoard(board);
+        };
     }
 
 

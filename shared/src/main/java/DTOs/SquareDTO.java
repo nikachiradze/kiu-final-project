@@ -13,7 +13,8 @@ import java.util.Objects;
 @Setter
 public class SquareDTO implements Serializable {
     private final Position position;
-    private final PieceColor color;;
+    private final PieceColor color;
+    ;
 
     private PieceDTO pieceDTO;
 
@@ -26,10 +27,9 @@ public class SquareDTO implements Serializable {
         this.color = color;
     }
 
-    public boolean getDisplay(){
+    public boolean getDisplay() {
         return display;
     }
-
 
 
     @Override

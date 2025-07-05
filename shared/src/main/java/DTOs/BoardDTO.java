@@ -20,11 +20,16 @@ public class BoardDTO implements Serializable {
 
     private PieceDTO currPiece;
 
+    private int currX;
+    private int currY;
+
+    @Getter
+    private GameStatusDTO gameStatus;
+
     public BoardDTO(SquareDTO[][] board, List<PieceDTO> whitePieces, List<PieceDTO> blackPieces) {
         this.board = board;
         this.whitePieces = whitePieces;
         this.blackPieces = blackPieces;
     }
-
 
 }

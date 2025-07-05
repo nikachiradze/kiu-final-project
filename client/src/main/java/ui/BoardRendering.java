@@ -4,12 +4,13 @@ import DTOs.BoardDTO;
 import DTOs.PieceDTO;
 import DTOs.SquareDTO;
 import Enums.PieceColor;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
+@Getter
 public class BoardRendering extends JPanel{
     private  BoardDTO chessBoard;
     @Setter

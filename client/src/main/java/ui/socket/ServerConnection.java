@@ -1,8 +1,6 @@
 package ui.socket;
 
-import DTOs.BoardDTO;
-import DTOs.GameInitDTO;
-import DTOs.MoveDTO;
+import DTOs.*;
 import ui.abstracts.MoveSender;
 
 import java.io.IOException;
@@ -20,13 +18,15 @@ public class ServerConnection implements Runnable, MoveSender {
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private Consumer<GameInitDTO> pieceColrListener;
+    private Consumer<GameStatusDTO> gameResultListener;
     private volatile boolean running = true;
+    private boolean called = false;
 
-    public ServerConnection(String host, int port, Consumer<BoardDTO> boardDTOListener) {
+    public ServerConnection(String host, int port, Consumer<BoardDTO> boardDTOListener, Consumer<GameStatusDTO> gameResultListener) {
         this.host = host;
         this.port = port;
         this.boardStateListener = boardDTOListener;
+        this.gameResultListener = gameResultListener;
 //        this.gameStatusListener = gameStatusListener;
 //        this.pieceColrListener = playerColorListener;
     }
@@ -44,7 +44,11 @@ public class ServerConnection implements Runnable, MoveSender {
                     boardStateListener.accept(boardDTO);
                     if (boardDTO.getGameStatus() != null) {
                         Thread.sleep(1000);
-//                        gameStatusListener.accept(boardDTO.getGameStatus());
+//                          .accept(boardDTO.getGameStatus());
+                        if(!called) {
+                            gameResultListener.accept(boardDTO.getGameStatus());
+                            called = true;
+                        }
                     }
                 }
             }

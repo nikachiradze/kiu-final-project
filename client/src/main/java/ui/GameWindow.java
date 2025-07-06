@@ -1,8 +1,6 @@
 package ui;
 
-import DTOs.BoardDTO;
-import DTOs.PieceDTO;
-import DTOs.SquareDTO;
+import DTOs.*;
 import chess.common.adapter.ModelToDtoConverter;
 import chess.model.Board;
 import chess.util.Clock;
@@ -103,10 +101,11 @@ public class GameWindow {
 
 
     private void startConnection(){
-        serverConnection = new ServerConnection("localhost", 8888, updateBoard());
+        serverConnection = new ServerConnection("localhost", 8888, updateBoard(), showGameResult());
         boardRendering.addMouseListener(new BoardMouseListener(new MouseListenerImpl(boardRendering.getChessBoard(),boardRendering, serverConnection)));
         new Thread(serverConnection).start();
     }
+
 
 // Helper function to create data panel
 
@@ -132,6 +131,12 @@ public class GameWindow {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private Consumer<GameStatusDTO> showGameResult() {
+        return (result) -> {
+            JOptionPane.showMessageDialog(gameWindow, "checkmate occured", "checkmate", JOptionPane.INFORMATION_MESSAGE);
+        };
     }
 
 

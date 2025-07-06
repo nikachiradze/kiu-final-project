@@ -1,7 +1,8 @@
+import chess.dbcontroller.GameDbManager;
+
 public class app {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!"
-        );
+        new GameDbManager().insertGame("ddd", "ddd", "ddd", "ddd");
     }
 }

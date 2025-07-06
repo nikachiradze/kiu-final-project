@@ -1,5 +1,6 @@
 package chess.server.services.pgn;
 
+import DTOs.MoveDTO;
 import chess.model.entity.GameInfo;
 
 //package chess.server.services.pgn;
@@ -8,5 +9,5 @@ public interface PgnService {
 
     GameInfo save(GameInfo gameInfo);
 
-    boolean addMove(String from, String to) throws Exception;
+    boolean addMove(MoveDTO moveDTO) throws Exception;
 }

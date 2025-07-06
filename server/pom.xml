@@ -25,5 +25,12 @@
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.45.1.0</version> <!-- latest as of 2025 -->
+        </dependency>
+
     </dependencies>
 </project>

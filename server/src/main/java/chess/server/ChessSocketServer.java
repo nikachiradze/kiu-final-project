@@ -1,11 +1,20 @@
 package chess.server;
 
 import DTOs.BoardDTO;
+import DTOs.GameStatusDTO;
 import DTOs.MoveDTO;
+import Enums.GameStatusType;
+import Enums.PieceColor;
 import chess.common.adapter.ModelToDtoConverter;
+import chess.common.checkmateDetector.CheckmateDetector;
+import chess.common.checkmateDetector.StandardCheckmateDetector;
+import chess.dbcontroller.GameDbManager;
 import chess.model.Board;
 import chess.model.Piece;
 import chess.model.Square;
+import chess.model.entity.GameInfo;
+import chess.server.services.pgn.PgnService;
+import chess.server.services.pgn.PgnServiceImplementation;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,6 +35,11 @@ public class ChessSocketServer {
     private Board board = new Board();
     private List<Socket> clients = new LinkedList<>();
 
+    private final CheckmateDetector checkmateDetector = new StandardCheckmateDetector(board);
+    private GameStatusDTO gameStatus;
+
+    private PgnService pgnService = new PgnServiceImplementation(new GameDbManager(),board);
+
     public static void main(String[] args) {
         int port = 8888;
 
@@ -38,16 +52,18 @@ public class ChessSocketServer {
                 System.out.println("Accepted connection from " + client.getInetAddress().getHostAddress() + ":" + client.getPort());
                 server.clients.add(client);
             }
-            server. startGame();  // only called once
+            server.startGame();  // only called once
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public void startGame() throws IOException, InterruptedException, ClassNotFoundException {
+    public void startGame() throws Exception {
         Socket player1 = clients.get(0);
         Socket player2 = clients.get(1);
         ObjectOutputStream whiteOut = new ObjectOutputStream(player1.getOutputStream());
@@ -60,25 +76,45 @@ public class ChessSocketServer {
         SyncBoard(whiteOut, blackOut);
 
         while (true) {
-            Thread.sleep(1000);
+//            Thread.sleep(1000);
 //            board.getWhitePieces().remove(0);
+            if(checkmateDetector.isStalemate(PieceColor.BLACK) || checkmateDetector.isStalemate(PieceColor.WHITE)) {
+                gameStatus = new GameStatusDTO(GameStatusType.DRAW, PieceColor.BLACK);
+                GameInfo gameInfo = new GameInfo();
+                gameInfo.setResult("1/2-1/2");
+                pgnService.save(gameInfo);
+                break;
+            }
+            if(checkmateDetector.isCheckMate(PieceColor.BLACK) || checkmateDetector.isCheckMate(PieceColor.WHITE)) {
+                gameStatus = new GameStatusDTO(GameStatusType.CHECKMATE, PieceColor.BLACK);
+                GameInfo gameInfo = new GameInfo();
+                gameInfo.setResult("1/2-1/2");
+                pgnService.save(gameInfo);
+                break;
+            }
+
             if(board.getTurn()){
                 Object obj = whiteIn.readObject();
                 if(obj instanceof MoveDTO move){
+                    pgnService.addMove(move);
+
                     if(processMove(move)){
                              //
+//                        pgnService.addMove(move);
                     }
                 }
             }else{
                 Object obj = blackIn.readObject();
                 if(obj instanceof MoveDTO move){
-                    if(processMove(move)){
+                    pgnService.addMove(move);
 
-                        // lukia yle gadmoitans pgn serviss da gaaketebs bazas romelshic sheinaxav gaaktebs entity da sheinaxavs
+                    if(processMove(move)){
+//                        pgnService.addMove(move);
                     }
                 }
             }
 
+            board.toggleTurn();
             System.out.println("removed");
         }
     }
@@ -89,8 +125,11 @@ public class ChessSocketServer {
             try {
                 BoardDTO boardState = ModelToDtoConverter.convertModelToDto(board);
 
+                boardState.setGameStatus(gameStatus);
+
                 whiteOut.writeObject(boardState);
                 blackOut.writeObject(boardState);
+
             } catch (IOException e) {
                 System.out.println("Failed to send board state: " + e.getMessage());
                 scheduler.shutdown();  // stop sending if a client disconnects
@@ -112,7 +151,7 @@ public class ChessSocketServer {
             return false;
         }
         board.setCurrPiece(null);
-        board.toggleTurn();
+//        board.toggleTurn();
         return true;
     }
 
